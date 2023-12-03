@@ -53,35 +53,35 @@ fn find_nums(input: &str) -> (u64, u64) {
     words.sort_by(|a, b| a.0.cmp(&b.0));
 
     // get left digit
-    let mut left_digit_return: u64 = 0;
-    if let Some((value, index)) = left_digit {
+    let left_digit_return: u64 = if let Some((value, index)) = left_digit {
         if let Some((first_index, first_value)) = words.first() {
-            left_digit_return = if index < *first_index {
+            if index < *first_index {
                 value
             } else {
                 *first_value
             }
         } else {
-            left_digit_return = value;
+            value
         }
     } else {
-        left_digit_return = words.first().unwrap().1;
-    }
+        words.first().unwrap().1
+    };
+
     // get right digit
-    let mut right_digit_return: u64 = 0;
-    if let Some((value, index)) = right_digit {
+    let right_digit_return: u64 = if let Some((value, index)) = right_digit {
         if let Some((last_index, last_value)) = words.last() {
-            right_digit_return = if index > *last_index {
+            if index > *last_index {
                 value
             } else {
                 *last_value
             }
         } else {
-            right_digit_return = value;
+            value
         }
     } else {
-        right_digit_return = words.last().unwrap().1;
-    }
+        words.last().unwrap().1
+    };
+
     println!(
         "{:?} left_digit: {:?} right_digit: {:?}",
         words, left_digit, right_digit
